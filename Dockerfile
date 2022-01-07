@@ -1,12 +1,11 @@
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8-slim
+FROM python:3.8
 
-EXPOSE 80
+WORKDIR /code
 
-EXPOSE 443
+COPY ./requirements.txt /code/requirements.txt
 
-COPY ./requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
-RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+COPY ./app /code/app/
 
-COPY ./app /app/app/
-# COPY ./.env.dev /app/.env
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
