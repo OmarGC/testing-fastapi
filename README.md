@@ -12,8 +12,8 @@ Cree un archivo ´.env´ que contenga las variables de entorno (CAMBIA VALORES P
 ```
     ENVIRONMENT=localhost
     X_API_KEY=NEW_APIKEY
-    DATABASE=crm_plusv
-    DB_HOST= HOST_DB
+    DATABASE=NAME_DB
+    DB_HOST=HOST_DB
     DB_USER=USER_DB
     DB_PASSWORD=PASS_DB
     JWT_SECRET=JWT_SECRET
