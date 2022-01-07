@@ -52,5 +52,10 @@ class UserController(BaseController):
             return super().create(new_user.dict())
 
         except SQLAlchemyError as error:
-            print({ "Error": "SQLAlchemyError", "nameFunction": "create", "detail": error })
+            print( {
+                "Error": type(error).__name__,
+                "nameFunction": "create",
+                "detail": error,
+                "type": type(error)
+            } )
     

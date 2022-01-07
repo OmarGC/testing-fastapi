@@ -69,5 +69,15 @@ def create_user(user: CreateUserSchema):
         
         return CreateUserSuccessSchema( id_usuario=id_new_user )
     except Exception as error:
-        print( { "Error": "Exception", "nameFunction": "create_user", "detail": error } )
-        raise ValueError({ "Error": "Exception", "nameFunction": "create_user", "detail": error})
+        print({
+            "Error": type(error).__name__,
+            "nameFunction": "create_user",
+            "detail": error,
+            "type": type(error)
+        })
+        raise ValueError({
+            "Error": type(error).__name__,
+            "nameFunction": "create_user",
+            "detail": error,
+            "type": type(error)
+        })
