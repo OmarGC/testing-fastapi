@@ -21,12 +21,12 @@ Cree un archivo ´.env´ que contenga las variables de entorno (CAMBIA VALORES P
 
 Suponiendo que ya ha instalado docker, cree una imagen que contenga la API
 ```
-docker build -t omargc/testing-fastapi-image:image_python_3.9 .
+docker build -t omargc/testing-fastapi-image:image_python_3.9-slim .
 ```
 
 Crear contenedor dev y correr proyecto
 ```
-docker run -d --env-file ./.env --name testing-fastapi-dev -p 8000:80 omargc/testing-fastapi-image:image_python_3.9
+docker run -d --env-file ./.env --name testing-fastapi-dev -p 8000:80 omargc/testing-fastapi-image:image_python_3.9-slim
 ```
 
 Una ves el proyecto se ejecute abrir navegador en la ruta:  
