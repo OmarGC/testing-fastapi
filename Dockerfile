@@ -1,11 +1,23 @@
-FROM python:3.9-slim
+# using ubuntu LTS version
+FROM ubuntu:20.04
 
-WORKDIR /code
+# install python
+RUN DEBIAN_FRONTEND=noninteractive apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install python3.9 python3.9-dev python3-pip -y
+RUN DEBIAN_FRONTEND=noninteractive apt-get install python3.9-venv -y
+RUN DEBIAN_FRONTEND=noninteractive apt-get install build-essential -y
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/*
 
-COPY ./requirements.txt /code/requirements.txt
+# create and activate virtual environment
+WORKDIR /fastapi
+RUN python3.9 -m venv ./venv
+ENV PATH=/fastapi/venv/bin:$PATH
 
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+# install requirements
+COPY ./requirements.txt .
+RUN pip3 install --no-cache-dir --upgrade -r requirements.txt
 
-COPY ./app /code/app/
+COPY ./app ./app
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
