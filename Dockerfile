@@ -2,22 +2,16 @@
 FROM ubuntu:20.04
 
 # install python
-RUN DEBIAN_FRONTEND=noninteractive apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get install python3.9 python3.9-dev python3-pip -y
-RUN DEBIAN_FRONTEND=noninteractive apt-get install python3.9-venv -y
-RUN DEBIAN_FRONTEND=noninteractive apt-get install build-essential -y
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get update
+RUN apt-get install python3 -y
+RUN apt-get install python3-pip -y
 
-# create and activate virtual environment
 WORKDIR /fastapi
-RUN python3.9 -m venv ./venv
-ENV PATH=/fastapi/venv/bin:$PATH
 
 # install requirements
-COPY ./requirements.txt .
+COPY ./requirements.txt /fastapi/requirements.txt
 RUN pip3 install --no-cache-dir --upgrade -r requirements.txt
 
-COPY ./app ./app
+COPY ./app /fastapi/app
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
