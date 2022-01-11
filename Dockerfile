@@ -1,5 +1,5 @@
 FROM amazonlinux:2
-RUN yum install -y python3 python3-pip
+RUN yum install -y python3.9 python3-pip
 
 WORKDIR /code
 
